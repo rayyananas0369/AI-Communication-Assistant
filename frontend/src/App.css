@@ -1,0 +1,48 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f4f9;
+  text-align: center;
+}
+
+.navbar {
+  background: #6200ea;
+  color: white;
+  padding: 1rem;
+}
+
+.mode-toggle button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  background: #ccc;
+  cursor: pointer;
+}
+
+.mode-toggle .active {
+  background: #6200ea;
+  color: white;
+}
+
+.camera-section {
+  margin: 20px;
+}
+
+.output-box {
+  margin: 20px auto;
+  width: 80%;
+}
+
+.output-box textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+}
+
+.features {
+  margin-top: 30px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  display: inline-block;
+}

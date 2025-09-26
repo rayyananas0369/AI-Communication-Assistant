@@ -1,0 +1,54 @@
+/* Tailwind directives must be at the top */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Your custom styles */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+}
+
+.navbar {
+  background: #0077b6;
+  padding: 15px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mode-toggle button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  background: #0077b6;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.mode-toggle button.active {
+  background: #023e8a;
+}
+
+.camera-box {
+  margin: 20px auto;
+}
+
+.output-box {
+  margin: 20px auto;
+}
+
+.features {
+  margin: 40px auto;
+}
+
+footer {
+  background: #0077b6;
+  color: white;
+  padding: 10px;
+}
