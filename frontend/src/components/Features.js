@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Hand, Eye, Accessibility, Repeat } from "lucide-react";
+=======
+import { Hand, Accessibility, Repeat } from "lucide-react";
+>>>>>>> 62c66d1 (Initial commit)
 
 export default function Features() {
   const features = [
@@ -10,7 +14,11 @@ export default function Features() {
     {
       title: "Lip Reading Technology",
       desc: "Cutting-edge lip reading algorithms convert visual speech into written text.",
+<<<<<<< HEAD
       icon: <Eye className="w-8 h-8 text-red-500 mx-auto" />,
+=======
+     // icon: <className="w-8 h-8 text-red-500 mx-auto" />,
+>>>>>>> 62c66d1 (Initial commit)
     },
     {
       title: "Accessibility Focused",
