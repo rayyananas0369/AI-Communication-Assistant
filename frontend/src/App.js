@@ -1,38 +1,49 @@
-<<<<<<< HEAD
-=======
-import { useRef, useState } from "react";
->>>>>>> 62c66d1 (Initial commit)
+import { useState } from "react";
 import ModeToggle from "./components/ModeToggle";
 import CameraFeed from "./components/CameraFeed";
 import OutputBox from "./components/OutputBox";
 import Features from "./components/Features";
 
+// Dummy AI functions for testing
+const detectSignLanguage = async (frame) => {
+  // Replace with real AI model later
+  return "Detected Sign Language Text";
+};
+
+const detectLipReading = async (frame) => {
+  // Replace with real AI model later
+  return "Detected Lip Reading Text";
+};
+
 function App() {
-  const handleModeChange = (mode) => {
-    console.log("Selected mode:", mode);
+  const [mode, setMode] = useState("lip"); // default mode
+  const [output, setOutput] = useState("");
+
+  const handleModeChange = (selectedMode) => {
+    setMode(selectedMode);
+    console.log("Selected mode:", selectedMode);
+  };
+
+  const handleFrame = async (frame) => {
+    let text = "";
+    if (mode === "sign") {
+      text = await detectSignLanguage(frame);
+    } else if (mode === "lip") {
+      text = await detectLipReading(frame);
+    }
+    setOutput(text);
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
-<<<<<<< HEAD
       {/* Header */}
-      <header className="text-center py-6 bg-indigo-600 text-white shadow-lg">
-        <h1 className="text-2xl font-bold">AI Communication Assistant</h1>
-        <p className="text-sm">
-          Multimodal AI for hearing and speech impaired users
-        </p>
-=======
-      {/* Header with centered heading and right-side About button */}
       <header className="flex flex-col md:flex-row justify-between items-center px-8 py-6 bg-indigo-600 text-white shadow-lg">
-        {/* Heading center */}
-        <div className="flex-1 flex flex-col items-center md:items-center text-center">
+        <div className="flex-1 flex flex-col items-center text-center">
           <h1 className="text-3xl font-bold mb-1">AI Communication Assistant</h1>
           <p className="text-md md:text-lg text-indigo-100">
             Multimodal AI for hearing and speech impaired users
           </p>
         </div>
-
-        {/* About button on right side */}
         <nav className="mt-4 md:mt-0">
           <a
             href="#about"
@@ -41,28 +52,19 @@ function App() {
             About
           </a>
         </nav>
->>>>>>> 62c66d1 (Initial commit)
       </header>
 
       {/* Mode Toggle */}
       <ModeToggle onModeChange={handleModeChange} />
 
       {/* Main Section */}
-<<<<<<< HEAD
-      <main className="max-w-5xl mx-auto p-6 grid md:grid-cols-2 gap-6 flex-grow">
-=======
       <main className="max-w-6xl mx-auto p-6 grid md:grid-cols-2 gap-6 flex-grow">
->>>>>>> 62c66d1 (Initial commit)
-        <CameraFeed />
-        <OutputBox />
+        <CameraFeed setOutputText={handleFrame} />
+        <OutputBox text={output} />
       </main>
 
       {/* Features Section */}
-<<<<<<< HEAD
-      <section className="max-w-5xl mx-auto p-6">
-=======
       <section id="about" className="max-w-6xl mx-auto p-6">
->>>>>>> 62c66d1 (Initial commit)
         <Features />
       </section>
 
