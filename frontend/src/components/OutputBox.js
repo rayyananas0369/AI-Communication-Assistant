@@ -3,10 +3,6 @@ export default function OutputBox({ text }) {
     navigator.clipboard.writeText(text);
   };
 
-  const handleClear = () => {
-    // optional: notify App.js if needed
-  };
-
   return (
     <div className="p-4 bg-white rounded-2xl shadow-md flex flex-col h-full">
       <h2 className="text-lg font-bold mb-2">Output</h2>
@@ -22,12 +18,6 @@ export default function OutputBox({ text }) {
           className="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600"
         >
           Copy Text
-        </button>
-        <button
-          onClick={handleClear}
-          className="px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
-        >
-          Clear Text
         </button>
       </div>
     </div>

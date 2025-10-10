@@ -1,12 +1,13 @@
 import { useRef, useState } from "react";
 
-export default function CameraFeed({ setOutputText }) {
+export default function CameraFeed({ mode, setOutputText }) {
   const videoRef = useRef(null);
   const [stream, setStream] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
 
   const handleStartClick = () => {
     setShowPopup(true);
+    setOutputText("Waiting for recognition...");
   };
 
   const handleAllow = async () => {
@@ -15,30 +16,52 @@ export default function CameraFeed({ setOutputText }) {
       videoRef.current.srcObject = mediaStream;
       setStream(mediaStream);
 
-      // send sample frame for testing
-      setInterval(() => {
-        if (videoRef.current) {
-          const canvas = document.createElement("canvas");
-          canvas.width = videoRef.current.videoWidth;
-          canvas.height = videoRef.current.videoHeight;
-          canvas.getContext("2d").drawImage(videoRef.current, 0, 0);
-          const frame = canvas.toDataURL("image/jpeg");
-          setOutputText(frame);
+      const interval = setInterval(async () => {
+        if (!videoRef.current) return;
+
+        const canvas = document.createElement("canvas");
+        canvas.width = videoRef.current.videoWidth;
+        canvas.height = videoRef.current.videoHeight;
+        canvas.getContext("2d").drawImage(videoRef.current, 0, 0);
+
+        const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg"));
+        const formData = new FormData();
+        formData.append("file", blob, "frame.jpg");
+
+        const url =
+          mode === "lip"
+            ? "http://localhost:8000/predict/lipreading"
+            : "http://localhost:8000/predict/sign";
+
+        try {
+          const res = await fetch(url, { method: "POST", body: formData });
+          const data = await res.json();
+          setOutputText(data.text);
+        } catch (err) {
+          console.error("Backend error:", err);
         }
-      }, 1000);
+      }, 2000);
+
+      videoRef.current.intervalId = interval;
     } catch (err) {
       console.error("Camera access denied", err);
     }
+
     setShowPopup(false);
   };
 
-  const handleDeny = () => setShowPopup(false);
+  const handleDeny = () => {
+    setShowPopup(false);
+    stopCamera();
+  };
 
   const stopCamera = () => {
     if (stream) {
       stream.getTracks().forEach((track) => track.stop());
       setStream(null);
-      setOutputText("Camera stopped.");
+    }
+    if (videoRef.current?.intervalId) {
+      clearInterval(videoRef.current.intervalId);
     }
   };
 
