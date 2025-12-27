@@ -29,9 +29,9 @@ export default function CameraFeed({ mode, setOutputText }) {
         formData.append("file", blob, "frame.jpg");
 
         const url =
-          mode === "lip"
-            ? "http://localhost:8000/predict/lipreading"
-            : "http://localhost:8000/predict/sign";
+  mode === "lip"
+    ? "http://localhost:8000/predict/lip"
+    : "http://localhost:8000/predict/sign";
 
         try {
           const res = await fetch(url, { method: "POST", body: formData });

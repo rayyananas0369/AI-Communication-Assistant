@@ -19,9 +19,9 @@ function VideoPredictor() {
     formData.append("video", file);
 
     const endpoint =
-      mode === "lipreading"
-        ? "http://localhost:8000/predict/lipreading"
-        : "http://localhost:8000/predict/sign";
+  mode === "lipreading"
+    ? "http://127.0.0.1:8000/predict/lip"
+    : "http://127.0.0.1:8000/predict/sign";
 
     try {
       const response = await fetch(endpoint, {

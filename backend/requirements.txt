@@ -1,3 +1,9 @@
 fastapi
 uvicorn
+numpy
+opencv-python
+tensorflow==2.19.1
+mediapipe==0.10.31
+
+ultralytics
 python-multipart
